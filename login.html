@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="./login.css" />
+  <title>Login</title>
+  <script>
+    function validateForm(formId) {
+      let isValid = true;
+      const formElements = [];
+      formElements.forEach(input => {
+        if (!input.value.trim()) {
+          isValid = false;
+          input.style.borderColor = 'red';
+        } else {
+          input.style.borderColor = '';
+        }
+      });
+    }
+    function processError() {
+      const queryParamsString = window.location.search.substr(1);
+      const queryParams = queryParamsString
+        .split('&')
+        .reduce((accumulator, singleQueryParam) => {
+          const [key, value] = singleQueryParam.split('=');
+          accumulator[key] = decodeURIComponent(value);
+          return accumulator;
+        }, {});
+        console.log(queryParams)
+        if(queryParams.invalid_user) {
+          document.getElementById("error_username").innerHTML="Invalid Username";
+        } else  if(queryParams.invalid_pwd) {
+          document.getElementById("error_password").innerHTML="Invalid password";
+        }
+    }
+    function handleRepeat(formId) {
+      const pass = document.getElementById("pass").value;
+      const repeatPass = document.getElementById("repeat_pass").value;
+      if (pass!== repeatPass) {
+        document.getElementById("repeat_pass_err").innerHTML = "Passwords don't match!";
+        document.getElementById("repeat_pass").style.borderColor = 'red';
+      } else {
+        document.getElementById("repeat_pass_err").innerHTML = "";
+        document.getElementById("repeat_pass").style.borderColor = '';
+      }
+    }
+    function handlepass(formId) {
+      const password = document.getElementById("pass").value;
+      if (password.length < 8) {
+        document.getElementById("pass_err").innerHTML = "Password must be at least 8 characters.";
+        document.getElementById("pass").style.borderColor = 'red';
+      } else {
+        document.getElementById("pass_err").innerHTML = "";
+        document.getElementById("pass").style.borderColor = '';
+      }
+    }
+    function handleChange(event, formId) {
+      event.preventDefault();
+      if (validateForm(formId)) {
+        console.log("Form submitted");
+      } else {
+        alert("Please fill out all fields correctly.");
+      }
+    }
+  </script>
+</head>
+
+<body onload="processError()">
+  <div class="login-wrap">
+    <div class="login-html">
+      <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+      <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+      <div class="login-form">
+        <form id="signin-form" action="/sign_in" method="post" >
+          <div class="sign-in-htm">
+            <span id="wrong_password" style="color:red"></span>
+            <div class="group">
+              <label for="sign_user" class="label">Username</label>
+              <input id="sign_user" name="sign_user" type="text" class="input" required onChange="document.getElementById('error_username').innerHTML=''">
+              <span id="error_username" style="color:red"></span>
+            </div>
+            <div class="group">
+              <label for="sign_pass" class="label">Password</label>
+              <input id="sign_pass" name="sign_pass" type="password" class="input" required data-type="password" onChange="document.getElementById('error_password').innerHTML=''">
+              <span id="error_password" style="color:red"></span>
+            </div>
+            <div class="group">
+            <a href="./index.html"><button type="submit" class="button">Sign In</button></a>
+            </div>
+            <div class="hr"></div>
+          </div>
+        </form>
+        <form id="signup-form" action="/sign_up" method="post" >
+        <div class="sign-up-htm">
+          <div class="group">
+            <label for="user"  class="label">Username</label>
+            <input id="user" name="username" type="text" class="input" required>
+            <span id="user_err" style="color:red"></span>
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Password</label>
+            <input id="pass" name="password" type="password" class="input" data-type="password" onchange="handlepass()">
+            <span id="pass_err" style="color:red"></span>
+          </div>
+          <div class="group">
+            <label for="repeat_pass" class="label">Repeat Password</label>
+            <input id="repeat_pass" name="repeat_pass" type="password" class="input" data-type="password" required onchange="handleRepeat()">
+            <span id="repeat_pass_err" style="color:red"></span>
+          </div>
+          <div class="group">
+            <label for="email" class="label">Email Address</label>
+            <input id="email" name="email" type="email" class="input"  required>
+            <span id="email_err" style="color:red"></span>
+          </div>
+          <div class="group">
+          <button class="button" id="sign_up_button" onclick="handleChange()">Sign Up</button>
+          </div>
+          <div class="hr"></div>
+        </div>
+        </form>
+    </div>
+  </div>
+</body>
+</html>

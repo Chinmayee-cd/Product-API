@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>img {
+        width: 100%;
+        z-index:-1;
+    }
+    
+    .height {
+        height: 10px;
+    }
+    
+    /* Image-container design */
+    .image-container {
+        max-width: 800px;
+        position: relative;
+        margin: auto;
+    }
+    
+    .next {
+        right: 0;
+    }
+    
+    /* Next and previous icon design */
+    .previous,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        padding: 10px;
+        margin-top: -25px;
+        color:black;
+        size:100px;
+        visibility:visible;
+        z-index:1;
+    }
+    
+    /* caption decorate */
+    .captionText {
+        color: #000000;
+        font-size: 14px;
+        position: absolute;
+        padding: 12px 12px;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Slider image number */
+    .slideNumber {
+        background-color: #5574C5;
+        color: white;
+        border-radius: 25px;
+        right: 0;
+        opacity: .5;
+        margin: 5px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 24px;
+        position: absolute;
+    }
+    
+    .fa {
+        font-size: 32px;
+    }
+    
+    .fa:hover {
+        transform: rotate(360deg);
+        transition: 1s;
+        color: white;
+    }
+    
+    .footerdot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.5s ease;
+    }
+    
+    .active,
+    .footerdot:hover {
+        background-color: black;
+    }
+    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">PRODU</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Products</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXlG4y3p+6fT2sERJkL04p3ZZThvbzbbX4aWIQF4IVRg9A5BZCd4P4X8TOp" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhG6qaU2K2+Mt0LY3M6L8Qb4YmNU6z5FtvHt1tRaDioy6Nxk10QlPiXb82J0" crossorigin="anonymous"></script>
+  <div class="image-container">
+    <div class="slide">
+        <div class="slideNumber">1</div>
+        <img src="img-1.jpg">
+    </div>
+    <div class="slide">
+        <div class="slideNumber">2</div>
+        <img src="img-2.jpg">    </div>
+    <div class="slide">
+        <div class="slideNumber">3</div>
+        <img src=
+"sofa.webp" >   </div>
+    <a class="previous" onclick="moveSlides(-1)">
+        <i class="fa fa-chevron-circle-left" style="z-index:1;color:black;"></i>
+    </a>
+    <a class="next" onclick="moveSlides(1)">
+        <i class="fa fa-chevron-circle-right" color="solid white"></i>
+    </a>
+</div>
+<script>
+    let slideIndex = 1;
+    displaySlide(slideIndex);
+    
+    function moveSlides(n) {
+        displaySlide(slideIndex += n);
+    }
+    
+    function activeSlide(n) {
+        displaySlide(slideIndex = n);
+    }
+    
+    /* Main function */
+    function displaySlide(n) {
+        let i;
+        let totalslides =
+            document.getElementsByClassName("slide");
+        let totaldots =
+            document.getElementsByClassName("footerdot");
+    
+        if (n > totalslides.length) {
+            slideIndex = 1;
+        }
+    
+        if (n < 1) {
+            slideIndex = totalslides.length;
+        }
+        for (i = 0; i < totalslides.length; i++) {
+            totalslides[i].style.display = "none";
+        }
+        for (i = 0; i < totaldots.length; i++) {
+            totaldots[i].className =
+                totaldots[i].className.replace(" active", "");
+        }
+        totalslides[slideIndex - 1].style.display = "block";
+        totaldots[slideIndex - 1].className += " active";
+    }
+    </script>
+  
+</body>
+</html>

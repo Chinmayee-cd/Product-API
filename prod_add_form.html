@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Products</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">PRODU</a>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <div class="container-fluid">
+            <div class="row">
+                <form action="product_add" method="post" style="border:2px solid black;background-color: beige;margin-top:10px;margin-bottom:10px;padding-top:10px;padding-bottom:10px">
+                    <div class="sign-in-htm">
+                          <div class="group">
+                            <label for="product_id" class="label">Product ID:</label>
+                            <input id="product_id" name="product_id" type="text" class="input" required><br><br>
+                          </div>
+                          <div class="group">
+                            <label for="name" class="label">Product Name</label>
+                            <input id="name" name="name" type="text" class="input" required><br><br>
+                          </div>
+                          <div class="group">
+                            <label for="price" class="label">Price</label>
+                            <input id="price" name="price" type="number" class="input" required><br> <br>                       </div>
+                          <div class="group">
+                            <label for="featured" class="label">Featured</label><br>
+                            <input type="radio" id="featured" name="featured" value="true" checked>True<br>
+                            <input type="radio" id="featured" name="featured" value="false">False<br><br>
+                          </div>
+                          <div class="group">
+                            <label for="rating" class="label">Rating</label>
+                            <input id="rating" name="rating" type="number" class="input" step=".01"> <br> <br>                        </div>
+                          <div class="group">
+                            <label for="created_at" class="label">Created At:</label>
+                            <input id="created_at" name="created_at" type="date" class="input" required><br><br>
+                          </div>
+                          <div class="group">
+                            <label for="company" class="label">Company</label>
+                            <input id="company" name="company" type="text" class="input" required><br><br>
+                          </div>
+                    </div>
+                    <button type="submit">Add Product</button>
+                </form>
+            </div>
+          </div>
+
+    </body>
+</html>
